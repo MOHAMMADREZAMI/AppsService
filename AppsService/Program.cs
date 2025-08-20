@@ -1,7 +1,12 @@
 using AppsService;
+using Microsoft.Extensions.Hosting;
 
-var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<Worker>();
+Directory.CreateDirectory("C:\\Logs");
 
-var host = builder.Build();
+IHost host = Host.CreateDefaultBuilder(args)
+    .UseWindowsService()
+    .ConfigureServices(services =>
+    {
+        services.AddHostedService<Worker>();
+    }).Build();
 host.Run();
