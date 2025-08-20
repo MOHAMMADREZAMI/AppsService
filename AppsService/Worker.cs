@@ -14,39 +14,51 @@ namespace AppsService
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                object Result;
-                int Numbers;
-                List<string> Directories = new List<string>();
+            
+             object Result;
+             int Numbers;
+             List<string> Directories = new List<string>();
 
-                SqliteConnection connection = new SqliteConnection("Data Source=Apps.db");
-                SqliteCommand command = new SqliteCommand();
+             SqliteConnection connection = new SqliteConnection("Data Source=C:\\Logs\\Apps.db");
+             SqliteCommand command = new SqliteCommand();
 
+             connection.Open();
+             command.Connection = connection; 
+             command.CommandText = "SELECT MAX(AppID) AS AppID FROM Apps";
+             Result = command.ExecuteScalar();
+             connection.Close();
+
+             Numbers = Convert.ToInt32(Result);
+
+             for (int Check = 0; Check <= Numbers - 1; Check++)
+             {
                 connection.Open();
-                command.Connection = connection; 
-                command.CommandText = "SELECT MAX(AppID) AS AppID FROM Apps";
+                command.CommandText = $"SELECT AppDirectory From Apps Where AppID = {Numbers}";
                 Result = command.ExecuteScalar();
                 connection.Close();
+                Directories.Add(Result.ToString());
+             }
 
-                Numbers = Convert.ToInt32(Result);
-
-                for (int Check = 0; Check <= Numbers; Check++)
+             for(int Check = 0; Check <= Directories.Count -1; Check++)
+             {
+                ProcessStartInfo info = new ProcessStartInfo
                 {
-                    connection.Open();
-                    command.CommandText = $"SELECT AppDirectory From Apps Where AppID = {Numbers}";
-                    Result = command.ExecuteScalar();
-                    connection.Close();
-                    Directories.Add(Result.ToString());
-                }
+                    FileName = "powershell",
+                    Arguments = $"& \'{Directories[Check]}\'",
+                    WorkingDirectory = @$"C:\Logs",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false, 
+                    CreateNoWindow = false
+                };
 
-                for(int Check = 0; Check <= Directories.Count -1; Check++)
-                {
-                    Process.Start(Directories[Check]);
-                }
+                Process process = new Process();
+                process.StartInfo = info;
+                process.Start();
+                
+             }
 
-                await Task.Delay(Timeout.Infinite, stoppingToken);
-            }
+            await Task.Delay(-1, stoppingToken);
         }
     }
 }
