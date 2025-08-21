@@ -41,7 +41,7 @@ namespace AppsService
             for (int Check = 0; Check <= Numbers - 1; Check++)
             {
                connection.Open();
-               command.CommandText = $"SELECT AppDirectory From Apps Where AppID = {Numbers}";
+               command.CommandText = $"SELECT AppDirectory From Apps Where AppID = {Check}";
                Result = command.ExecuteScalar();
                connection.Close();
                Directories.Add(Result.ToString());
