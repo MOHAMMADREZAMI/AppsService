@@ -16,8 +16,8 @@ It uses a simple SQLite database to store the paths of your applications, so you
 ## 📥 Installation
 1. Download the latest release from the [Releases](../../releases) page.
 2. Extract the file from the `.zip` archive.
-3. First run the **Directory.exe** and Enter the number of apps you want to add (enter 0 if you want to add a single application).
-4. After that Enter the locations of your apps (for example `C:\MinecraftServer\Start.bat`).
+3. First run the **Directory.exe** and Enter the number of apps you want to add (enter 0 if you want to add a single application) <img width="353" height="34" alt="image" src="https://github.com/user-attachments/assets/ba066119-3338-4243-a5a5-a64ad8ee9df5" />
+4. After that Enter the locations of your apps (for example `C:\MinecraftServer\Start.bat`)<img width="559" height="59" alt="image" src="https://github.com/user-attachments/assets/7767fac3-2460-41d7-b333-37674d27d41f" />
 5. Open the cmd (run as administrator).
 6. Run the following command: `sc create ServiceRunner binPath= "YOUR SERVICE LOCATION\AppsService.exe" start= auto`.
 7. Then, start the service with: `sc start ServiceRunner`.
@@ -31,7 +31,6 @@ It uses a simple SQLite database to store the paths of your applications, so you
 5. Go to the "Log On" Tab
 6. Choose "This Account" and Enter your Username and Password
 7. Click Apply , then OK
-
 ---
 ## 🛠️ Usage
 - Use the **Directory.exe** program to add `.exe` or `.bat` file paths into the database.  
