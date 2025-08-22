@@ -1,6 +1,6 @@
 # 🚀 Apps Service
 
-It is a Service Runner , Service Runner is a Windows service that automatically runs your console applications (`.exe` and `.bat` files) at system startup.  
+It is a Service Runner , Service Runner is a Windows service that automatically runs your console applications (`.exe` and `.bat` files) at Windows startup.  
 It uses a simple SQLite database to store the paths of your applications, so you don’t need to configure each one as a separate service.
 
 ---
