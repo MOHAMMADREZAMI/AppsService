@@ -38,7 +38,7 @@ namespace AppsService
             Numbers = Convert.ToInt32(Result);
             
             //Get Directories
-            for (int Check = 0; Check <= Numbers - 1; Check++)
+            for (int Check = 1; Check <= Numbers ; Check++)
             {
                connection.Open();
                command.CommandText = $"SELECT AppDirectory From Apps Where AppID = {Check}";
